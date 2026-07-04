@@ -11,6 +11,14 @@
 
     <h1>My Library</h1>
 
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <a href="/add_author">Add Author</a><br>
     <a href="/add_book">Add Book</a>
 
@@ -51,6 +59,15 @@
             alt="Book Cover"
           >
 
+          <br><br>
+
+          <form
+            action="{{ url_for('delete_book', book_id=book.id) }}"
+            method="POST"
+          >
+            <button type="submit">Delete Book</button>
+          </form>
+
           <hr>
         </div>
       {% endfor %}
@@ -63,4 +80,3 @@
 
   </body>
 </html>
-

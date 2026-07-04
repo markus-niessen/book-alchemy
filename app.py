@@ -1,10 +1,11 @@
 import os
-from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-from data_models import db, Author, Book
 from datetime import datetime
 
+from flask import Flask, render_template, request, redirect, url_for, flash
+from data_models import db, Author, Book
+
 app = Flask(__name__)
+app.secret_key = "my_secret_key"
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,6 +32,7 @@ def home():
         search_query=search_query
     )
 
+
 @app.route("/add_author", methods=["GET", "POST"])
 def add_author():
     message = None
@@ -43,7 +45,10 @@ def add_author():
         birth_date = datetime.strptime(birth_date, "%Y-%m-%d").date()
 
         if date_of_death:
-            date_of_death = datetime.strptime(date_of_death, "%Y-%m-%d").date()
+            date_of_death = datetime.strptime(
+                date_of_death,
+                "%Y-%m-%d"
+            ).date()
         else:
             date_of_death = None
 
@@ -84,7 +89,28 @@ def add_book():
 
         message = "Book successfully added."
 
-    return render_template("add_book.html", authors=authors, message=message)
+    return render_template(
+        "add_book.html",
+        authors=authors,
+        message=message
+    )
+
+
+@app.route("/book/<int:book_id>/delete", methods=["POST"])
+def delete_book(book_id):
+    book = Book.query.get_or_404(book_id)
+    author = book.author
+
+    db.session.delete(book)
+    db.session.commit()
+
+    if author and len(author.books) == 0:
+        db.session.delete(author)
+        db.session.commit()
+
+    flash("Book successfully deleted.")
+
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
