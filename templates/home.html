@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>My Library</title>
   </head>
+
   <body>
 
     <h1>My Library</h1>
@@ -13,26 +14,53 @@
     <a href="/add_author">Add Author</a><br>
     <a href="/add_book">Add Book</a>
 
+    <hr>
+
+    <h2>Search Books</h2>
+
+    <form method="GET" action="{{ url_for('home') }}">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search by title..."
+        value="{{ search_query }}"
+      >
+      <button type="submit">Search</button>
+    </form>
+
     <h2>Sort Books</h2>
+
     <a href="/?sort=title">Sort by Title</a>
     |
     <a href="/?sort=author">Sort by Author</a>
 
     <hr>
 
-    {% for book in books %}
-      <div>
-        <h3>{{ book.title }}</h3>
+    {% if books %}
 
-        <p>Author: {{ book.author.name }}</p>
-        <p>ISBN: {{ book.isbn }}</p>
-        <p>Publication Year: {{ book.publication_year }}</p>
+      {% for book in books %}
+        <div>
+          <h3>{{ book.title }}</h3>
 
-        <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg" alt="Book Cover">
+          <p>Author: {{ book.author.name }}</p>
+          <p>ISBN: {{ book.isbn }}</p>
+          <p>Publication Year: {{ book.publication_year }}</p>
 
-        <hr>
-      </div>
-    {% endfor %}
+          <img
+            src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+            alt="Book Cover"
+          >
+
+          <hr>
+        </div>
+      {% endfor %}
+
+    {% else %}
+
+      <p>No books found matching your search.</p>
+
+    {% endif %}
 
   </body>
 </html>
+

@@ -18,15 +18,18 @@ db.init_app(app)
 
 @app.route("/")
 def home():
-    sort_by = request.args.get("sort", "title")
+    search_query = request.args.get("search", "")
 
-    if sort_by == "author":
-        books = Book.query.join(Author).order_by(Author.name).all()
+    if search_query:
+        books = Book.query.filter(Book.title.ilike(f"%{search_query}%")).all()
     else:
-        books = Book.query.order_by(Book.title).all()
+        books = Book.query.all()
 
-    return render_template("home.html", books=books)
-
+    return render_template(
+        "home.html",
+        books=books,
+        search_query=search_query
+    )
 
 @app.route("/add_author", methods=["GET", "POST"])
 def add_author():
