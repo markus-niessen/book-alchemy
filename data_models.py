@@ -11,7 +11,11 @@ class Author(db.Model):
     birth_date = db.Column(db.Date, nullable=False)
     date_of_death = db.Column(db.Date, nullable=True)
 
-    books = db.relationship("Book", back_populates="author")
+    books = db.relationship(
+        "Book",
+        back_populates="author",
+    cascade="all, delete-orphan"
+    )
 
     def __repr__(self):
         return self.name

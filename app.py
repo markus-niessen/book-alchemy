@@ -71,6 +71,17 @@ def add_author():
     return render_template("add_author.html", message=message)
 
 
+@app.route("/author/<int:author_id>/delete", methods=["POST"])
+def delete_author(author_id):
+    author = Author.query.get_or_404(author_id)
+
+    db.session.delete(author)
+    db.session.commit()
+
+    flash(f"Author '{author.name}' and all related books were deleted successfully.")
+    return redirect(url_for("home"))
+
+
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
     message = None

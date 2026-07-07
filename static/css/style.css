@@ -4,6 +4,8 @@
     box-sizing: border-box;
 }
 
+/* ---------- Body / Container ---------- */
+
 body {
     font-family: Georgia, "Times New Roman", serif;
     background: #f3ede2;
@@ -55,7 +57,7 @@ h1 {
     color: #53735a;
 }
 
-/* ---------- Flash message ---------- */
+/* ---------- Flash Message ---------- */
 
 .flash-message {
     background: #d9f2d9;
@@ -152,6 +154,7 @@ h2 {
     font-size: 20px;
     color: #203b25;
     background: #ffffff;
+    margin-bottom: 0;
 }
 
 .search-form input:focus {
@@ -185,15 +188,6 @@ h2 {
 .button-search-icon {
     font-size: 23px;
     line-height: 1;
-}
-
-.search-form input {
-    margin-bottom: 0;
-}
-
-.search-button,
-.sort-buttons a {
-    height: 56px;
 }
 
 .toolbar-divider {
@@ -276,8 +270,37 @@ h2 {
     font-size: 15px;
 }
 
+.author-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.author-line p {
+    margin-bottom: 0;
+}
+
+.delete-author-form {
+    margin: 0;
+}
+
+.delete-author-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 2px 4px;
+    transition: 0.2s ease;
+}
+
+.delete-author-icon:hover {
+    transform: scale(1.2);
+}
+
 .book-cover {
-    width: 160px;
+    width: auto;
     height: 235px;
     object-fit: contain;
     display: block;
@@ -355,36 +378,6 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background: linear-gradient(180deg, #3c7a49, #244f2d);
-}
-
-.page-title {
-    text-align: center;
-    font-size: 54px;
-    margin: 20px 0 28px;
-    color: #244f2d;
-}
-
-.form-card {
-    max-width: 720px;
-    margin: 0 auto 28px auto;
-    background: #ffffff;
-    padding: 32px;
-    border-radius: 14px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-}
-
-.back-link {
-    display: block;
-    width: fit-content;
-    margin: 0 auto 35px auto;
-    color: #244f2d;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.back-link:hover {
-    text-decoration: underline;
 }
 
 /* ---------- Responsive ---------- */
