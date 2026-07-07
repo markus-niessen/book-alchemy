@@ -52,16 +52,21 @@ def add_author():
         else:
             date_of_death = None
 
-        new_author = Author(
-            name=name,
-            birth_date=birth_date,
-            date_of_death=date_of_death
-        )
+        existing_author = Author.query.filter_by(name=name).first()
 
-        db.session.add(new_author)
-        db.session.commit()
+        if existing_author:
+            message = "Author already exists."
+        else:
+            new_author = Author(
+                name=name,
+                birth_date=birth_date,
+                date_of_death=date_of_death
+            )
 
-        message = "Author successfully added."
+            db.session.add(new_author)
+            db.session.commit()
+
+            message = "Author successfully added."
 
     return render_template("add_author.html", message=message)
 
