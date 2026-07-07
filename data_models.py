@@ -14,7 +14,7 @@ class Author(db.Model):
     books = db.relationship(
         "Book",
         back_populates="author",
-    cascade="all, delete-orphan"
+        cascade="all, delete-orphan"
     )
 
     def __repr__(self):
@@ -28,6 +28,8 @@ class Book(db.Model):
     isbn = db.Column(db.String(20), nullable=False)
     title = db.Column(db.String(200), nullable=False)
     publication_year = db.Column(db.Integer, nullable=True)
+    rating = db.Column(db.Integer, nullable=True)
+
     author_id = db.Column(db.Integer, db.ForeignKey("authors.id"), nullable=False)
 
     author = db.relationship("Author", back_populates="books")

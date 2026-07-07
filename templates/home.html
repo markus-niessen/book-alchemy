@@ -115,7 +115,27 @@
 
                             <p><strong>ISBN:</strong> {{ book.isbn }}</p>
                             <p><strong>Publication Year:</strong> {{ book.publication_year }}</p>
+                            <div class="rating-display">
+                                {% if book.rating %}
+                                    <span class="rating-label">Rating:</span>
 
+                                    <span class="stars">
+                                             {% for number in range(1, 11) %}
+                                                 {% if number <= book.rating %}
+                                                     ★
+                                                 {% else %}
+                                                     ☆
+                                                 {% endif %}
+                                             {% endfor %}
+                                    </span>
+
+                                    <span class="rating-number">{{ book.rating }}/10</span>
+                                {% else %}
+                                    <span class="no-rating">
+                                    <strong>Rating:</strong> No rating yet
+                                </span>
+                                {% endif %}
+                            </div>
                             <img
                                     src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
                                     alt="{{ book.title }}"
@@ -126,11 +146,13 @@
                                 <button
                                         type="submit"
                                         class="delete-button"
-                                        onclick="return confirm('Are you sure you want to delete this user?')"
+                                        onclick="return confirm('Are you sure you want to delete this book?')"
                                 >
                                     Delete Book
                                 </button>
                             </form>
+
+
                         </div>
                     {% endfor %}
                 </div>

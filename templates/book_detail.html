@@ -1,55 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ book.title }}</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ book.title }}</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
 
-<div class="container">
+        <div class="container">
 
-    <header class="hero">
-        <div class="hero-text">
-            <h1>Book Details</h1>
-            <p class="subtitle">Information about this book</p>
+            <header class="hero">
+                <div class="hero-text">
+                    <h1>Book Details</h1>
+                    <p class="subtitle">Information about this book</p>
+                </div>
+            </header>
+
+            <section class="detail-card">
+
+                <h2>{{ book.title }}</h2>
+
+                <p class="detail-info">
+                    <strong>Author:</strong>
+                    <a href="{{ url_for('author_detail', author_id=book.author.id) }}">
+                        {{ book.author.name }}
+                    </a>
+                </p>
+
+                <p class="detail-info">
+                    <strong>ISBN:</strong> {{ book.isbn }}
+                </p>
+
+                <p class="detail-info">
+                    <strong>Publication Year:</strong> {{ book.publication_year }}
+                </p>
+
+                <p class="detail-info">
+                    <strong>Rating:</strong>
+
+                    {% if book.rating %}
+                        <span class="stars">
+            {% for number in range(1, 11) %}
+                {% if number <= book.rating %}
+                    ★
+                {% else %}
+                    ☆
+                {% endif %}
+            {% endfor %}
+        </span>
+
+                        {{ book.rating }}/10
+                    {% else %}
+                        No rating yet
+                    {% endif %}
+                </p>
+
+                <form action="{{ url_for('rate_book', book_id=book.id) }}" method="POST" class="rating-form">
+
+                    <label for="rating"><strong>Rate this book:</strong></label>
+
+                    <input
+                            type="number"
+                            id="rating"
+                            name="rating"
+                            min="1"
+                            max="10"
+                            value="{{ book.rating if book.rating else '' }}"
+                            required
+                    >
+
+                    <button type="submit">Save Rating</button>
+
+                </form>
+
+                <img
+                        src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg"
+                        alt="{{ book.title }}"
+                        class="detail-book-cover"
+                >
+
+            </section>
+
+            <nav class="main-nav">
+                <a href="{{ url_for('home') }}">← Back to Library</a>
+            </nav>
+
         </div>
-    </header>
 
-    <section class="detail-card">
-
-        <h2>{{ book.title }}</h2>
-
-        <p class="detail-info">
-            <strong>Author:</strong>
-            <a href="{{ url_for('author_detail', author_id=book.author.id) }}">
-                {{ book.author.name }}
-            </a>
-        </p>
-
-        <p class="detail-info">
-            <strong>ISBN:</strong> {{ book.isbn }}
-        </p>
-
-        <p class="detail-info">
-            <strong>Publication Year:</strong> {{ book.publication_year }}
-        </p>
-
-        <img
-            src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg"
-            alt="{{ book.title }}"
-            class="detail-book-cover"
-        >
-
-    </section>
-
-    <nav class="main-nav">
-        <a href="{{ url_for('home') }}">← Back to Library</a>
-    </nav>
-
-</div>
-
-</body>
+    </body>
 </html>

@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Book</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Book</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
 
-<body>
+    <body>
 
-<div class="container">
+        <div class="container">
 
-    <h1 class="page-title">Add Book</h1>
+            <h1 class="page-title">Add Book</h1>
 
-    {% if message %}
-        <p class="flash-message">{{ message }}</p>
-    {% endif %}
+            {% if message %}
+                <p class="flash-message">{{ message }}</p>
+            {% endif %}
 
-    <div class="form-card">
+            <div class="form-card">
 
-        <form action="/add_book" method="POST">
+                <form action="/add_book" method="POST">
 
-            <label for="title">Book Title</label>
-            <input type="text" id="title" name="title" required>
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" required>
 
-            <label for="isbn">ISBN</label>
-            <input type="text" id="isbn" name="isbn" required>
+                    <label for="isbn">ISBN</label>
+                    <input type="text"
+                           id="isbn"
+                           name="isbn" required>
 
-            <label for="publication_year">Publication Year</label>
-            <input type="number" id="publication_year" name="publication_year">
+                    <label for="publication_year">Publication Year</label>
+                    <input type="number"
+                           id="publication_year"
+                           name="publication_year">
 
-            <label for="author_id">Author</label>
+                    <label for="rating">Rating (1–10):</label>
+                    <input
+                            type="number"
+                            id="rating"
+                            name="rating"
+                            min="1"
+                            max="10"
+                            placeholder="1–10"
+                    >
 
-            <select id="author_id" name="author_id" required>
-                {% for author in authors %}
-                    <option value="{{ author.id }}">{{ author.name }}</option>
-                {% endfor %}
-            </select>
+                    <label for="author_id">Author</label>
 
-            <input type="submit" value="Add Book">
+                    <select id="author_id" name="author_id" required>
+                        {% for author in authors %}
+                            <option value="{{ author.id }}">{{ author.name }}</option>
+                        {% endfor %}
+                    </select>
 
-        </form>
+                    <input type="submit" value="Add Book">
 
-    </div>
+                </form>
 
-    <p>
-        <a class="back-link" href="/">← Back to Home</a>
-    </p>
+            </div>
 
-</div>
+            <p>
+                <a class="back-link" href="/">← Back to Home</a>
+            </p>
 
-</body>
+        </div>
+
+    </body>
 </html>

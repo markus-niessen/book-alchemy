@@ -97,12 +97,14 @@ def add_book():
         title = request.form.get("title")
         isbn = request.form.get("isbn")
         publication_year = request.form.get("publication_year")
+        rating = request.form.get("rating")
         author_id = request.form.get("author_id")
 
         new_book = Book(
             title=title,
             isbn=isbn,
             publication_year=publication_year,
+            rating=int(rating) if rating else None,
             author_id=author_id
         )
 
@@ -139,6 +141,24 @@ def delete_book(book_id):
 def book_detail(book_id):
     book = Book.query.get_or_404(book_id)
     return render_template("book_detail.html", book=book)
+
+
+@app.route("/rate_book/<int:book_id>", methods=["POST"])
+def rate_book(book_id):
+    book = Book.query.get_or_404(book_id)
+    rating = request.form.get("rating")
+
+    if rating:
+        rating = int(rating)
+
+        if 1 <= rating <= 10:
+            book.rating = rating
+            db.session.commit()
+            flash("Book rating saved successfully.")
+        else:
+            flash("Rating must be between 1 and 10.")
+
+    return redirect(url_for("book_detail", book_id=book.id))
 
 
 if __name__ == "__main__":

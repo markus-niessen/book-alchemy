@@ -57,6 +57,27 @@ h1 {
     color: #53735a;
 }
 
+.page-title {
+    text-align: center;
+    font-size: 64px;
+    color: #244f2d;
+    margin-bottom: 24px;
+}
+
+.back-link {
+    display: block;
+    width: fit-content;
+    margin: 24px auto 0 auto;
+    color: #244f2d;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
 /* ---------- Flash Message ---------- */
 
 .flash-message {
@@ -238,14 +259,14 @@ h2 {
 
 .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .book-card {
     background: white;
     border-radius: 14px;
-    padding: 22px;
+    padding: 10px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
@@ -430,6 +451,65 @@ input[type="submit"]:hover {
     margin: 25px auto 0;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Rating ---------- */
+
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 0 14px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.stars {
+    color: #c49a2c;
+    font-size: 17px;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.rating-number {
+    margin-left: 0px;
+    font-weight: bold;
+    color: #244f2d;
+}
+
+.no-rating {
+    font-style: italic;
+    color: #777;
+}
+
+.rating-form {
+    max-width: 360px;
+    margin-top: 20px;
+}
+
+.rating-form label {
+    margin-bottom: 8px;
+}
+
+.rating-form input {
+    width: 120px;
+    margin-right: 10px;
+}
+
+.rating-form button {
+    background: linear-gradient(180deg, #2f653b, #204b2a);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.rating-form button:hover {
+    background: linear-gradient(180deg, #3c7a49, #244f2d);
 }
 
 /* ---------- Responsive ---------- */
