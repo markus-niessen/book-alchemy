@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Author</title>
-  </head>
-  <body>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
 
     <h1>Add Author</h1>
 
     {% if message %}
-      <p>{{ message }}</p>
+        <p class="flash-message">{{ message }}</p>
     {% endif %}
 
-    <form action="/add_author" method="POST">
-      <label for="name">Author Name:</label>
-      <input type="text" id="name" name="name" required><br><br>
+    <div class="form-card">
 
-      <label for="birth_date">Birthdate:</label>
-      <input type="date" id="birth_date" name="birth_date" required><br><br>
+        <form action="/add_author" method="POST">
 
-      <label for="date_of_death">Date of Death:</label>
-      <input type="date" id="date_of_death" name="date_of_death"><br><br>
+            <label for="name">Author Name</label>
+            <input type="text" id="name" name="name" required>
 
-      <input type="submit" value="Add Author">
-    </form>
+            <label for="birth_date">Birth Date</label>
+            <input type="date" id="birth_date" name="birth_date" required>
 
-    <br>
-    <a href="/">Back to Home</a>
+            <label for="date_of_death">Date of Death</label>
+            <input type="date" id="date_of_death" name="date_of_death">
 
-  </body>
+            <input type="submit" value="Add Author">
+
+        </form>
+
+    </div>
+
+    <p>
+        <a href="/">← Back to Home</a>
+    </p>
+
+</div>
+
+</body>
 </html>

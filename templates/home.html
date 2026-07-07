@@ -1,82 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>My Library</title>
-  </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
 
-  <body>
+<body>
+<div class="container">
 
-    <h1>My Library</h1>
+    <header class="hero">
+        <div class="hero-header">
+            <img
+                src="{{ url_for('static', filename='img/logo.png') }}"
+                alt="My Library Logo"
+                class="header-logo"
+            >
+
+            <div class="hero-text">
+                <h1>My Library</h1>
+                <p class="subtitle">Book &amp; Author Database</p>
+            </div>
+        </div>
+    </header>
 
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <p>{{ message }}</p>
-        {% endfor %}
-      {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="flash-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
     {% endwith %}
 
-    <a href="/add_author">Add Author</a><br>
-    <a href="/add_book">Add Book</a>
+    <nav class="main-nav">
+        <a href="/add_author">Add Author</a>
+        <a href="/add_book">Add Book</a>
+    </nav>
 
-    <hr>
+    <section class="toolbar">
 
-    <h2>Search Books</h2>
+        <div class="search-area">
+            <img
+                src="{{ url_for('static', filename='img/search2.png') }}"
+                alt="Search"
+                class="search-panel-icon"
+            >
 
-    <form method="GET" action="{{ url_for('home') }}">
-      <input
-        type="text"
-        name="search"
-        placeholder="Search by title..."
-        value="{{ search_query }}"
-      >
-      <button type="submit">Search</button>
-    </form>
+            <div class="search-content">
+                <h2>Search Books</h2>
 
-    <h2>Sort Books</h2>
+                <form method="GET" action="{{ url_for('home') }}" class="search-form">
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search by title..."
+                        value="{{ search_query }}"
+                    >
 
-    <a href="/?sort=title">Sort by Title</a>
-    |
-    <a href="/?sort=author">Sort by Author</a>
+                    <button type="submit" class="search-button">
+                        <span class="button-search-icon">🔍</span>
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
 
-    <hr>
+        <div class="toolbar-divider"></div>
+
+        <div class="sort-area">
+            <h2>Sort by</h2>
+
+            <div class="sort-buttons">
+                <a href="/?sort=title">Title A-Z</a>
+                <a href="/?sort=author">Author A-Z</a>
+            </div>
+        </div>
+
+    </section>
 
     {% if books %}
+        <div class="book-grid">
+            {% for book in books %}
+                <div class="book-card">
+                    <h3>{{ book.title }}</h3>
 
-      {% for book in books %}
-        <div>
-          <h3>{{ book.title }}</h3>
+                    <p><strong>Author:</strong> {{ book.author.name }}</p>
+                    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+                    <p><strong>Publication Year:</strong> {{ book.publication_year }}</p>
 
-          <p>Author: {{ book.author.name }}</p>
-          <p>ISBN: {{ book.isbn }}</p>
-          <p>Publication Year: {{ book.publication_year }}</p>
+                    <img
+                        src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+                        alt="{{ book.title }}"
+                        class="book-cover"
+                    >
 
-          <img
-            src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
-            alt="Book Cover"
-          >
-
-          <br><br>
-
-          <form
-            action="{{ url_for('delete_book', book_id=book.id) }}"
-            method="POST"
-          >
-            <button type="submit">Delete Book</button>
-          </form>
-
-          <hr>
+                    <form action="{{ url_for('delete_book', book_id=book.id) }}" method="POST">
+                        <button type="submit" class="delete-button">Delete Book</button>
+                    </form>
+                </div>
+            {% endfor %}
         </div>
-      {% endfor %}
-
     {% else %}
-
-      <p>No books found matching your search.</p>
-
+        <p class="empty-message">No books found matching your search.</p>
     {% endif %}
 
-  </body>
+</div>
+</body>
 </html>
