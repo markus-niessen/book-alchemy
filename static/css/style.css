@@ -357,6 +357,36 @@ input[type="submit"]:hover {
     background: linear-gradient(180deg, #3c7a49, #244f2d);
 }
 
+.page-title {
+    text-align: center;
+    font-size: 54px;
+    margin: 20px 0 28px;
+    color: #244f2d;
+}
+
+.form-card {
+    max-width: 720px;
+    margin: 0 auto 28px auto;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.back-link {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 35px auto;
+    color: #244f2d;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1050px) {
