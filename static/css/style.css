@@ -380,6 +380,58 @@ input[type="submit"]:hover {
     background: linear-gradient(180deg, #3c7a49, #244f2d);
 }
 
+/* ---------- Detail Pages ---------- */
+
+.detail-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 26px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.detail-card h2 {
+    color: #244f2d;
+    font-size: 34px;
+    margin-bottom: 16px;
+}
+
+.detail-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.detail-book-list {
+    display: grid;
+    gap: 12px;
+}
+
+.detail-book-list a {
+    background: #f3ede2;
+    color: #244f2d;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 18px;
+    border-radius: 9px;
+    border: 1px solid #d4cbbb;
+    transition: 0.2s ease;
+}
+
+.detail-book-list a:hover {
+    background: #edf3ea;
+    transform: translateY(-2px);
+}
+
+.detail-book-cover {
+    display: block;
+    width: 280px;
+    max-width: 100%;
+    margin: 25px auto 0;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1050px) {

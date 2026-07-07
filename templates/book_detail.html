@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Book Details</h1>
+            <p class="subtitle">Information about this book</p>
+        </div>
+    </header>
+
+    <section class="detail-card">
+
+        <h2>{{ book.title }}</h2>
+
+        <p class="detail-info">
+            <strong>Author:</strong>
+            <a href="{{ url_for('author_detail', author_id=book.author.id) }}">
+                {{ book.author.name }}
+            </a>
+        </p>
+
+        <p class="detail-info">
+            <strong>ISBN:</strong> {{ book.isbn }}
+        </p>
+
+        <p class="detail-info">
+            <strong>Publication Year:</strong> {{ book.publication_year }}
+        </p>
+
+        <img
+            src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-L.jpg"
+            alt="{{ book.title }}"
+            class="detail-book-cover"
+        >
+
+    </section>
+
+    <nav class="main-nav">
+        <a href="{{ url_for('home') }}">← Back to Library</a>
+    </nav>
+
+</div>
+
+</body>
+</html>

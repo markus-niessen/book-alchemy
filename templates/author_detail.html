@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ author.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <section class="detail-card">
+        <h1>{{ author.name }}</h1>
+
+        <p class="detail-info">
+            <strong>Birth Date:</strong> {{ author.birth_date }}
+        </p>
+
+        {% if author.date_of_death %}
+            <p class="detail-info">
+                <strong>Date of Death:</strong> {{ author.date_of_death }}
+            </p>
+        {% endif %}
+    </section>
+
+    <section class="detail-card">
+        <h2>Books by this author</h2>
+
+        {% if author.books %}
+            <div class="detail-book-list">
+                {% for book in author.books %}
+                    <a href="{{ url_for('book_detail', book_id=book.id) }}">
+                        {{ book.title }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No books found for this author.</p>
+        {% endif %}
+    </section>
+
+    <nav class="main-nav">
+        <a href="{{ url_for('home') }}">← Back to Library</a>
+    </nav>
+
+</div>
+
+</body>
+</html>
