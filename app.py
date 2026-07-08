@@ -52,7 +52,11 @@ def add_author():
         else:
             date_of_death = None
 
-        existing_author = Author.query.filter_by(name=name).first()
+        existing_author = Author.query.filter_by(
+            name=name,
+            birth_date=birth_date,
+            date_of_death=date_of_death
+        ).first()
 
         if existing_author:
             message = "Author already exists."
