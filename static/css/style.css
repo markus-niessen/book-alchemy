@@ -403,20 +403,6 @@ input[type="submit"]:hover {
 
 /* ---------- Detail Pages ---------- */
 
-.detail-card {
-    background: white;
-    border-radius: 14px;
-    padding: 28px;
-    margin-bottom: 26px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-.detail-card h2 {
-    color: #244f2d;
-    font-size: 34px;
-    margin-bottom: 16px;
-}
-
 .detail-info {
     font-size: 18px;
     margin-bottom: 10px;
@@ -444,11 +430,54 @@ input[type="submit"]:hover {
     transform: translateY(-2px);
 }
 
-.detail-book-cover {
-    display: block;
-    width: 280px;
+/* ---------- Author Detail Page ---------- */
+
+.author-detail-card {
+    max-width: 850px;
+    margin: 0 auto 26px auto;
+    padding: 28px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.author-detail-card h2 {
+    color: #244f2d;
+    font-size: 34px;
+    margin-bottom: 16px;
+}
+
+.author-detail-card .detail-book-list a {
+    padding: 11px 16px;
+}
+
+/* ---------- Book Detail Page ---------- */
+
+.book-detail-card {
+    width: fit-content;
+    max-width: 95%;
+    margin: 0 auto 26px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.book-detail-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.book-detail-content {
+    min-width: 360px;
+    max-width: 600px;
+    flex: 1;
+}
+
+.book-detail-cover {
+    width: 350px;
     max-width: 100%;
-    margin: 25px auto 0;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -605,5 +634,19 @@ input[type="submit"]:hover {
 
     .sort-buttons a {
         width: 100%;
+    }
+
+    .book-detail-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-detail-content {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .book-detail-cover {
+        width: 210px;
     }
 }

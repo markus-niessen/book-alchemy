@@ -9,8 +9,15 @@
 
 <div class="container">
 
-    <section class="detail-card">
-        <h1>{{ author.name }}</h1>
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Author Details</h1>
+            <p class="subtitle">Information about this author</p>
+        </div>
+    </header>
+
+    <section class="author-detail-card">
+        <h2>{{ author.name }}</h2>
 
         <p class="detail-info">
             <strong>Birth Date:</strong> {{ author.birth_date }}
@@ -23,8 +30,8 @@
         {% endif %}
     </section>
 
-    <section class="detail-card">
-        <h2>Books by this author</h2>
+    <section class="author-detail-card">
+        <h2>Books by this author ({{ author.books|length }})</h2>
 
         {% if author.books %}
             <div class="detail-book-list">
