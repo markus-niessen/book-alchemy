@@ -107,18 +107,23 @@ def add_book():
         rating = request.form.get("rating")
         author_id = request.form.get("author_id")
 
-        new_book = Book(
-            title=title,
-            isbn=isbn,
-            publication_year=publication_year,
-            rating=int(rating) if rating else None,
-            author_id=author_id
-        )
+        existing_book = Book.query.filter_by(isbn=isbn).first()
 
-        db.session.add(new_book)
-        db.session.commit()
+        if existing_book:
+            message = "A book with this ISBN already exists."
+        else:
+            new_book = Book(
+                title=title,
+                isbn=isbn,
+                publication_year=publication_year,
+                rating=int(rating) if rating else None,
+                author_id=author_id
+            )
 
-        message = "Book successfully added."
+            db.session.add(new_book)
+            db.session.commit()
+
+            message = "Book successfully added."
 
     return render_template(
         "add_book.html",
