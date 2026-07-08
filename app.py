@@ -23,16 +23,27 @@ with app.app_context():
 @app.route("/")
 def home():
     search_query = request.args.get("search", "")
+    sort_by = request.args.get("sort", "")
+
+    query = Book.query
 
     if search_query:
-        books = Book.query.filter(Book.title.ilike(f"%{search_query}%")).all()
+        query = query.filter(Book.title.ilike(f"%{search_query}%"))
+
+    if sort_by == "title":
+        query = query.order_by(Book.title.asc())
+    elif sort_by == "author":
+        query = query.join(Author).order_by(Author.name.asc())
     else:
-        books = Book.query.all()
+        query = query.order_by(Book.id.asc())
+
+    books = query.all()
 
     return render_template(
         "home.html",
         books=books,
-        search_query=search_query
+        search_query=search_query,
+        sort_by=sort_by
     )
 
 

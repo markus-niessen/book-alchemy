@@ -49,8 +49,8 @@
 
                     <div class="search-content">
                         <h2>Search Books</h2>
-
-                        <form method="GET" action="{{ url_for('home') }}" class="search-form">
+                        
+                        <form action="{{ url_for('home') }}" method="get" class="search-form">
                             <input
                                     type="text"
                                     name="search"
@@ -59,9 +59,12 @@
                             >
 
                             <button type="submit" class="search-button">
-                                <span class="button-search-icon">🔍</span>
-                                Search
+                                🔍 Search
                             </button>
+
+                            <a href="{{ url_for('home') }}" class="reset-button">
+                                Reset
+                            </a>
                         </form>
                     </div>
                 </div>
@@ -72,8 +75,13 @@
                     <h2>Sort by</h2>
 
                     <div class="sort-buttons">
-                        <a href="/?sort=title">Title A-Z</a>
-                        <a href="/?sort=author">Author A-Z</a>
+                        <a href="{{ url_for('home', sort='title', search=search_query) }}" class="sort-button">
+                            Title A-Z
+                        </a>
+
+                        <a href="{{ url_for('home', sort='author', search=search_query) }}" class="sort-button">
+                            Author A-Z
+                        </a>
                     </div>
                 </div>
 
