@@ -11,13 +11,16 @@ This project was created as part of the **Masterschool Software Engineering** pr
 - Add new authors
 - Add new books
 - Search books by title
+- Sort books alphabetically by title
+- Sort books alphabetically by author
 - View detailed author information
 - View detailed book information
 - Delete books
 - Delete authors (including all related books)
-- Automatic book cover retrieval using ISBN (Open Library)
 - Rate books from 1 to 10
 - Display book ratings with stars
+- Edit book ratings from the book detail page
+- Automatic book cover retrieval using ISBN (Open Library Covers API)
 - Flash messages for user feedback
 - Responsive user interface
 
@@ -32,12 +35,13 @@ This project was created as part of the **Masterschool Software Engineering** pr
 - HTML5
 - CSS3
 - Jinja2
+- Open Library Covers API
 
 ---
 
 ## Project Structure
 
-```
+```text
 book-alchemy/
 │
 ├── app.py
@@ -79,7 +83,7 @@ Go into the project folder:
 cd book-alchemy
 ```
 
-Create a virtual environment:
+Create a virtual environment.
 
 ### Windows
 
@@ -95,13 +99,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-Install the required packages:
+Install all required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Start the application:
+Run the application:
 
 ```bash
 python app.py
@@ -109,7 +113,7 @@ python app.py
 
 Open your browser:
 
-```
+```text
 http://127.0.0.1:5000
 ```
 
@@ -119,13 +123,15 @@ http://127.0.0.1:5000
 
 The application uses a local SQLite database.
 
-Tables are created automatically when the application is started for the first time.
+Database tables are created automatically when the application is started for the first time.
 
 ---
 
 ## Book Covers
 
 Book covers are automatically retrieved from the **Open Library Covers API** using the ISBN of each book.
+
+If no cover is available for a specific ISBN, no image is displayed.
 
 ---
 
@@ -137,6 +143,15 @@ Book covers are automatically retrieved from the **Open Library Covers API** usi
 - Sort by rating
 - Pagination
 - User authentication
+- Book descriptions
+- Publisher information
+- Genre support
+- AI-generated book summaries
+- AI reading recommendations
+- External book reviews
+- Book preview or reading sample
+- Open Library API integration
+- Google Books API integration
 
 ---
 
