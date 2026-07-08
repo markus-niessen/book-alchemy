@@ -15,14 +15,21 @@ This project was created as part of the **Masterschool Software Engineering** pr
 - Sort books alphabetically by author
 - View detailed author information
 - View detailed book information
-- Delete books
-- Delete authors (including all related books)
+- Delete books with confirmation dialog
+- Delete authors (including all related books) with confirmation dialog
 - Rate books from 1 to 10
 - Display book ratings with stars
 - Edit book ratings from the book detail page
 - Automatic book cover retrieval using ISBN (Open Library Covers API)
 - Flash messages for user feedback
 - Responsive user interface
+
+### Data Validation
+
+- Duplicate authors are prevented when **name**, **birth date**, and **date of death** are identical.
+- Duplicate books are prevented by validating the **ISBN** before saving.
+- Every ISBN can only exist once in the database.
+- Book ratings are limited to values between **1 and 10**.
 
 ---
 
@@ -111,19 +118,51 @@ Run the application:
 python app.py
 ```
 
+or
+
+```bash
+flask run --host=0.0.0.0 --port=5002
+```
+
 Open your browser:
 
 ```text
-http://127.0.0.1:5000
+http://127.0.0.1:5002
 ```
 
 ---
 
 ## Database
 
-The application uses a local SQLite database.
+The project includes a sample SQLite database located at:
 
-Database tables are created automatically when the application is started for the first time.
+```text
+data/library.sqlite
+```
+
+The sample database contains example authors and books so the application can be explored immediately after cloning the repository.
+
+If you want to start with an empty library, simply delete **only** the file:
+
+```text
+data/library.sqlite
+```
+
+Do **not** delete the **data** folder.
+
+When the application starts again, a new empty database with the required tables is created automatically.
+
+**Important**
+
+`db.create_all()` only creates missing tables.
+
+It does **not**:
+
+- add missing columns
+- modify existing tables
+- update the database schema
+
+If the database model changes in the future, the existing database should be recreated or migrated using a migration tool such as Flask-Migrate.
 
 ---
 
